@@ -16,5 +16,6 @@ void Grid::dfs_maze(){
     int cell_y = get_random_number(GRID_WIDTH);
 
     Cell start_cell = cells[cell_x][cell_y];
+    
 
 }
