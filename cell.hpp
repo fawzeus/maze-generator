@@ -13,8 +13,17 @@ class Cell{
         Cell& operator=(const Cell &other);
         void clear_wall(const short  side);
         void draw(sf::RenderWindow &window, sf::Vector2f position);
-        bool check_if_visited();
-        bool set_visited();
+        bool check_if_visited () const;
+        void set_visited();
+        void remove_top_wall() { top = false; }
+        void remove_bottom_wall() { bottom = false; }
+        void remove_left_wall() { left = false; }
+        void remove_right_wall() { right = false; }
+        bool has_top_wall() const { return top; }
+        bool has_bottom_wall() const { return bottom; }
+        bool has_left_wall() const { return left; }
+        bool has_right_wall() const { return right; }
+        void vist_not(){puts( is_visited ?"visited":"not visited");}
 };
 
 #endif

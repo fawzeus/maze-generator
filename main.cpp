@@ -4,6 +4,7 @@
 
 int main (){
     Grid grid;
+    grid.dfs_maze();
     sf::RenderWindow window(sf::VideoMode(WIDTH,HEIGHT),"Maze");
     while(window.isOpen()){
         sf::Event event;

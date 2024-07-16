@@ -71,11 +71,12 @@ void Cell::draw(sf::RenderWindow &window, sf::Vector2f position) {
     }
 }
 
-bool Cell::check_if_visited(){
+bool Cell::check_if_visited ()const{
     return is_visited;
 }
 
 
-bool Cell::set_visited(){
+void Cell::set_visited(){
     is_visited=true;
 }
+
