@@ -80,3 +80,29 @@ void Grid::dfs_maze(){
 
     
 }
+
+void Grid::dfs_maze_animation(std::stack<node> &st){
+    if(st.empty()) return;
+    std::random_device rd; 
+    std::mt19937 g(rd());
+    node current_node = st.top();st.pop();
+    remove_wall(current_node.current_x,current_node.current_y,current_node.prev_x,current_node.prev_y);
+    std::vector <std::pair<int,int>>  neigbors = get_neighbors(current_node.current_x,current_node.current_y);
+    // Shuffle the vector 
+    std::shuffle(neigbors.begin(), neigbors.end(), g);
+    for ( auto pos:neigbors){
+        if(!cells[pos.first][pos.second].check_if_visited()){
+            cells[pos.first][pos.second].set_visited();
+            node nd;
+            nd.current_x = pos.first;
+            nd.current_y = pos.second;
+            nd.prev_x = current_node.current_x;
+            nd.prev_y = current_node.current_y;
+            st.push(nd);
+        }
+    }
+}
+
+Cell Grid::get_cell(int x,int y)const {
+    return cells[x][y];
+}
