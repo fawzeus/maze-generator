@@ -9,11 +9,12 @@ int main (){
   
     Grid grid;
     //grid.dfs_maze();
+    grid.hunt_and_kill_maze();
     std::stack<node> st;
     int cell_x = get_random_number(GRID_HEIGHT);
     int cell_y = get_random_number(GRID_WIDTH);
     grid.get_cell(cell_x,cell_y).set_visited();
-    std::vector <std::pair<int,int>>  neigbors = get_neighbors(cell_x,cell_y);
+    std::vector <std::pair<int,int>>  neigbors = grid.get_neighbors(cell_x,cell_y);
     // Shuffle the vector 
     std::shuffle(neigbors.begin(), neigbors.end(), g);
     for ( auto pos:neigbors){
@@ -34,11 +35,11 @@ int main (){
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        grid.dfs_maze_animation(st);
+        //grid.dfs_maze_animation(st);
         grid.draw(window);
         window.display();
         window.clear();
-        sf::sleep(sf::milliseconds(50));
+        sf::sleep(sf::milliseconds(10));
     }
     return 0;
 }
