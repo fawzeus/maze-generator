@@ -1,6 +1,18 @@
 #include "algorithms.hpp"
 
 void dsf_maze(){
+    sf::Font font;
+    if (!font.loadFromFile("./fonts/arial.ttf")) {
+        puts("ERROR ! ");
+        return;
+    }
+
+    sf::Text title;
+    title.setCharacterSize(30);
+    title.setFont(font);
+    title.setString("DFS Maze");
+    title.setOrigin(title.getGlobalBounds().width/2,title.getGlobalBounds().height/2);
+    title.setPosition(WIDTH/2,50);
     Grid grid;
     grid.dfs_maze();
     sf::RenderWindow window(sf::VideoMode(WIDTH,HEIGHT),"DFS Maze");
@@ -11,6 +23,7 @@ void dsf_maze(){
                 window.close();
         }
         grid.draw(window);
+        window.draw(title);
         window.display();
         window.clear();
     }
@@ -19,7 +32,18 @@ void dfs_maze_animation(){
     // Initialize random number generator 
     std::random_device rd; 
     std::mt19937 g(rd()); 
-  
+    sf::Font font;
+    if (!font.loadFromFile("./fonts/arial.ttf")) {
+        puts("ERROR ! ");
+        return;
+    }
+
+    sf::Text title;
+    title.setCharacterSize(30);
+    title.setFont(font);
+    title.setString("DFS Maze Animation");
+    title.setOrigin(title.getGlobalBounds().width/2,title.getGlobalBounds().height/2);
+    title.setPosition(WIDTH/2,50);
     Grid grid;
     std::stack<node> st;   
     int cell_x = get_random_number(GRID_HEIGHT);
@@ -48,11 +72,24 @@ void dfs_maze_animation(){
         }
         grid.dfs_maze_animation(st);
         grid.draw(window);
+        window.draw(title);
         window.display();
         window.clear();
     }
 }
 void hunt_and_kill_maze(){
+    sf::Font font;
+    if (!font.loadFromFile("./fonts/arial.ttf")) {
+        puts("ERROR ! ");
+        return;
+    }
+
+    sf::Text title;
+    title.setCharacterSize(30);
+    title.setFont(font);
+    title.setString("Hunt and Kill Maze");
+    title.setOrigin(title.getGlobalBounds().width/2,title.getGlobalBounds().height/2);
+    title.setPosition(WIDTH/2,50);
     Grid grid;
     grid.hunt_and_kill_maze();
     sf::RenderWindow window(sf::VideoMode(WIDTH,HEIGHT),"Hunt and Kill Maze");
@@ -63,6 +100,7 @@ void hunt_and_kill_maze(){
                 window.close();
         }
         grid.draw(window);
+        window.draw(title);
         window.display();
         window.clear();
     }
@@ -70,7 +108,18 @@ void hunt_and_kill_maze(){
 
 
 void hunt_and_kill_maze_animation(){
-   
+    sf::Font font;
+    if (!font.loadFromFile("./fonts/arial.ttf")) {
+        puts("ERROR ! ");
+        return;
+    }
+
+    sf::Text title;
+    title.setCharacterSize(30);
+    title.setFont(font);
+    title.setString("Hunt and Kill Maze Animation");
+    title.setOrigin(title.getGlobalBounds().width/2,title.getGlobalBounds().height/2);
+    title.setPosition(WIDTH/2,50);
     Grid grid;
     bool hunt = false,done = false;
     int cell_x = get_random_number(GRID_HEIGHT);
@@ -114,12 +163,25 @@ void hunt_and_kill_maze_animation(){
             }
         }
         grid.draw(window);
+        window.draw(title);
         window.display();
         window.clear();
     }
 }
 
 void prim_maze(){
+    sf::Font font;
+    if (!font.loadFromFile("./fonts/arial.ttf")) {
+        puts("ERROR ! ");
+        return;
+    }
+
+    sf::Text title;
+    title.setCharacterSize(30);
+    title.setFont(font);
+    title.setString("Prim's Maze");
+    title.setOrigin(title.getGlobalBounds().width/2,title.getGlobalBounds().height/2);
+    title.setPosition(WIDTH/2,50);
     Grid grid;
     grid.prim_maze();
     sf::RenderWindow window(sf::VideoMode(WIDTH,HEIGHT),"Prim's Maze");
@@ -130,12 +192,25 @@ void prim_maze(){
                 window.close();
         }
         grid.draw(window);
+        window.draw(title);
         window.display();
         window.clear();
     }
 }
 
 void prim_maze_animation() {
+    sf::Font font;
+    if (!font.loadFromFile("./fonts/arial.ttf")) {
+        puts("ERROR ! ");
+        return;
+    }
+
+    sf::Text title;
+    title.setCharacterSize(30);
+    title.setFont(font);
+    title.setString("Prim's Maze Animation");
+    title.setOrigin(title.getGlobalBounds().width/2,title.getGlobalBounds().height/2);
+    title.setPosition(WIDTH/2,50);
     Grid grid;
     std::vector<std::tuple<int, int, int, int>> walls;
     
@@ -164,6 +239,7 @@ void prim_maze_animation() {
         }
         
         grid.draw(window);
+        window.draw(title);
         window.display();
         window.clear();
         
