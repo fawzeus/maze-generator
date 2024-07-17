@@ -12,7 +12,7 @@ class Cell{
         Cell(const Cell &other); 
         Cell& operator=(const Cell &other);
         void clear_wall(const short  side);
-        void draw(sf::RenderWindow &window, sf::Vector2f position);
+        void draw(sf::RenderWindow &window, sf::Vector2f position, bool highlited = false);
         bool check_if_visited () const;
         void set_visited();
         void remove_top_wall() { top = false; }

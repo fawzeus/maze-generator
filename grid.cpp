@@ -3,12 +3,18 @@
 
 Grid::Grid() {
     srand(time(0));
+    highlited_cell = std::make_pair(-1,-1);
+}
+
+void Grid::set_highlited_cell(int x,int y){
+    highlited_cell = std::make_pair(y,x);
 }
 void Grid::draw(sf::RenderWindow &window){
     float pos_x=WIDTH/2-GRID_WIDTH*SQUARE_SIZE/2,pos_y=HEIGHT/2-GRID_HEIGHT*SQUARE_SIZE/2-50;
     for(int i=0;i<GRID_HEIGHT;i++){
         for(int j=0;j<GRID_WIDTH;j++){
-            cells[i][j].draw(window,sf::Vector2f(pos_x+SQUARE_SIZE*i,pos_y+SQUARE_SIZE*j));
+            if(i==highlited_cell.first and j==highlited_cell.second) cells[i][j].draw(window,sf::Vector2f(pos_x+SQUARE_SIZE*i,pos_y+SQUARE_SIZE*j),true);
+            else cells[i][j].draw(window,sf::Vector2f(pos_x+SQUARE_SIZE*i,pos_y+SQUARE_SIZE*j));
         }
     }
 
@@ -185,4 +191,35 @@ std::vector<std::pair<int, int>> Grid::get_neighbors(int x, int y, bool  visited
         }
     }
     return res;
+}
+
+
+std::pair<int,int> Grid::hunt_and_kill_maze_animation(std::pair<int,int> current_cell){
+    std::vector <std::pair<int,int>>  neigbors = get_neighbors(current_cell.first,current_cell.second);
+    if (neigbors.size()==0) return std::make_pair(-1,-1);
+    std::pair<int,int> next_cell = neigbors[get_random_number(neigbors.size())];
+    remove_wall(next_cell.first,next_cell.second,current_cell.first,current_cell.second);
+    cells[next_cell.first][next_cell.second].set_visited();
+    return next_cell;
+
+}
+std::pair<int,std::pair<int,bool>> Grid::hunt_animation(std::pair<int,int> current_cell){
+    if (!cells[current_cell.first][current_cell.second].check_if_visited()){
+        std::vector <std::pair<int,int>>  neigbors = get_neighbors(current_cell.first,current_cell.second,true);
+        for(auto neigbor:neigbors){
+            if(cells[neigbor.first][neigbor.second].check_if_visited()){
+                return std::make_pair(neigbor.first,std::make_pair(neigbor.second,true));
+            }
+        }
+    }
+    if (current_cell.second < GRID_WIDTH - 1 ){
+        return std::make_pair(current_cell.first,std::make_pair(current_cell.second+1,false));
+    }
+    else if(current_cell.first< GRID_HEIGHT - 1){
+        return std::make_pair(current_cell.first+1,std::make_pair(0,false));
+    }
+    else {
+        return std::make_pair(-1,std::make_pair(-1,false));
+    }
+        
 }

@@ -37,36 +37,44 @@ void Cell::clear_wall(const short side){
     }
 }
 
-void Cell::draw(sf::RenderWindow &window, sf::Vector2f position) {
+void Cell::draw(sf::RenderWindow &window, sf::Vector2f position, bool highlited) {
+    sf::Color color= sf::Color::White;
+    if(highlited){
+        sf::RectangleShape highlight(sf::Vector2f(SQUARE_SIZE, SQUARE_SIZE));
+        highlight.setPosition(position);
+        highlight.setFillColor(sf::Color::Red);
+        window.draw(highlight);
+        return;
+    }
     // Draw top wall
-    if (top) {
+    if (top or highlited) {
         sf::RectangleShape topWall(sf::Vector2f(SQUARE_SIZE, LINE_THICKNESS));
         topWall.setPosition(position);
-        topWall.setFillColor(sf::Color::White);
+        topWall.setFillColor(color);
         window.draw(topWall);
     }
 
     // Draw left wall
-    if (left) {
+    if (left or highlited) {
         sf::RectangleShape leftWall(sf::Vector2f(LINE_THICKNESS, SQUARE_SIZE));
         leftWall.setPosition(position);
-        leftWall.setFillColor(sf::Color::White);
+        leftWall.setFillColor(color);
         window.draw(leftWall);
     }
 
     // Draw right wall
-    if (right) {
+    if (right or highlited) {
         sf::RectangleShape rightWall(sf::Vector2f(LINE_THICKNESS, SQUARE_SIZE));
         rightWall.setPosition(position + sf::Vector2f(SQUARE_SIZE - LINE_THICKNESS, 0));
-        rightWall.setFillColor(sf::Color::White);
+        rightWall.setFillColor(color);
         window.draw(rightWall);
     }
 
     // Draw bottom wall
-    if (bottom) {
+    if (bottom or highlited) {
         sf::RectangleShape bottomWall(sf::Vector2f(SQUARE_SIZE, LINE_THICKNESS));
         bottomWall.setPosition(position + sf::Vector2f(0, SQUARE_SIZE - LINE_THICKNESS));
-        bottomWall.setFillColor(sf::Color::White);
+        bottomWall.setFillColor(color);
         window.draw(bottomWall);
     }
 }

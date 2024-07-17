@@ -6,7 +6,6 @@
 #include <vector>
 #include <utility>
 #include "cell.hpp"
-class Grid;
 typedef struct node node;
 int get_random_number(int max);
 
