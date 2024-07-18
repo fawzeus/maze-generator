@@ -1,9 +1,12 @@
 #include "cell.hpp"
 
 
-Cell::Cell() : left(true), right(true), top(true), bottom(true), is_visited(false) {}
+Cell::Cell() : left(true), right(true), top(true), bottom(true), is_visited(false) {
+    direction = std::make_pair(-1,-1);
+}
 
-Cell::Cell(const Cell &other) : left(other.left), right(other.right), top(other.top), bottom(other.bottom), is_visited(other.is_visited) {}
+Cell::Cell(const Cell &other) : left(other.left), right(other.right), top(other.top), bottom(other.bottom), is_visited(other.is_visited) , direction(other.direction){
+}
 
 Cell& Cell::operator=(const Cell &other) {
     if (this != &other) { // Check for self-assignment
@@ -12,6 +15,7 @@ Cell& Cell::operator=(const Cell &other) {
         top = other.top;
         bottom = other.bottom;
         is_visited = other.is_visited;
+        direction = other.direction;
     }
     return *this;
 }
@@ -88,3 +92,11 @@ void Cell::set_visited(){
     is_visited=true;
 }
 
+
+void Cell::set_direction(int x, int y){
+    direction=std::make_pair(x,y);
+}
+
+std::pair<int,int> Cell::get_direction(){
+    return direction;
+}

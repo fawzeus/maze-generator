@@ -17,6 +17,8 @@ start:
                               "4. DFS Maze Animation\n"
                               "5. Prim's Maze\n"
                               "6. Prim's Maze Animation\n"
+                              "7. Origin Shift Maze Animation\n"
+                              "8. Origin Shift Maze\n"
                               "Q. Quit");
     welcome_text.setString("Welcome to the Maze Generator");
     list.setString("Press the following buttons to select an algorithm:");
@@ -57,6 +59,14 @@ start:
                 } else if (event.key.code == sf::Keyboard::Numpad6 || event.key.code == sf::Keyboard::Num6) {
                     window.close();
                     prim_maze_animation();
+                    goto start;
+                }else if(event.key.code == sf::Keyboard::Numpad7 || event.key.code == sf::Keyboard::Num7){
+                    window.close();
+                    origin_shift_animation();
+                    goto start;
+                }else if(event.key.code == sf::Keyboard::Numpad8 || event.key.code == sf::Keyboard::Num8){
+                    window.close();
+                    origin_shift();
                     goto start;
                 }
                 else if(event.key.code == sf::Keyboard::Q){

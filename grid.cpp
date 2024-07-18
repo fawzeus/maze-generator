@@ -39,6 +39,24 @@ void Grid::remove_wall(int x1, int y1, int x2, int y2) {
         cells[y2][x2].remove_top_wall();
     }
 }
+void Grid::set_wall(int x1, int y1, int x2, int y2){
+    if (x1 == x2 and y1 == y2 + 1) { // c1 is to the right of c2
+        cells[y1][x1].add_left_wall();
+        cells[y2][x2].add_right_wall();
+    }
+    else if (x1 == x2 and y1 == y2 - 1) { // c1 is to the left of c2
+        cells[y1][x1].add_right_wall();
+        cells[y2][x2].add_left_wall();
+    }
+    else if (x1 == x2 + 1 and y1 == y2) { // c1 is below c2
+        cells[y1][x1].add_top_wall();
+        cells[y2][x2].add_bottom_wall();
+    }
+    else if (x1 == x2 - 1 and y1 == y2) { // c1 is above c2
+        cells[y1][x1].add_bottom_wall();
+        cells[y2][x2].add_top_wall();
+    }
+}
 
 void Grid::dfs_maze(){
     // Initialize random number generator 
@@ -301,4 +319,30 @@ bool Grid::prim_maze_animation_step(std::vector<std::tuple<int, int, int, int>>&
     }
     
     return true;
+}
+
+void Grid::init_grid_shift(){
+    for(int i=0;i<GRID_HEIGHT;i++){
+        for(int j=0;j<GRID_WIDTH-1;j++){
+            cells[i][j].set_direction(i,j+1);
+            remove_wall(i,j,i,j+1);
+        }
+    }
+    for(int i=0;i<GRID_HEIGHT-1;i++){
+        cells[i][GRID_WIDTH-1].set_direction(i+1,GRID_WIDTH-1);
+        remove_wall(i,GRID_WIDTH-1,i+1,GRID_WIDTH-1);
+    }
+}
+
+std::pair<int,int> Grid::origin_shift(std::pair<int,int> origin){
+    std::vector <std::pair<int,int>> neigbors = get_neighbors(origin.first,origin.second,true);
+    std::pair<int,int> next_cell = neigbors[get_random_number(neigbors.size())];
+    set_highlited_cell(next_cell.first,next_cell.second);
+    if(cells[next_cell.first][next_cell.second].get_direction().first !=-1 and cells[next_cell.first][next_cell.second].get_direction().second!=-1){
+        set_wall(next_cell.first,next_cell.second,cells[next_cell.first][next_cell.second].get_direction().first,cells[next_cell.first][next_cell.second].get_direction().second);
+        cells[next_cell.first][next_cell.second].set_direction(-1,-1);
+    }
+    cells[origin.first][origin.second].set_direction(next_cell.first,next_cell.second);
+    remove_wall(origin.first,origin.second,next_cell.first,next_cell.second);
+    return next_cell;
 }

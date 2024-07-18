@@ -247,3 +247,70 @@ void prim_maze_animation() {
     }
 }
 
+
+
+void origin_shift_animation(){
+    sf::Font font;
+    if (!font.loadFromFile("./fonts/arial.ttf")) {
+        puts("ERROR ! ");
+        return;
+    }
+    sf::Text title;
+    title.setCharacterSize(30);
+    title.setFont(font);
+    title.setString("Origin Shift Maze Animation");
+    title.setOrigin(title.getGlobalBounds().width/2,title.getGlobalBounds().height/2);
+    title.setPosition(WIDTH/2,50);
+    Grid grid;
+    grid.init_grid_shift();
+    std::pair<int,int> shift_cell=std::make_pair(GRID_HEIGHT-1,GRID_WIDTH-1);
+    sf::RenderWindow window(sf::VideoMode(WIDTH,HEIGHT),"Origin Shift Maze Animation");
+    while(window.isOpen()){
+        sf::Event event;
+        while(window.pollEvent(event)){
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        grid.draw(window);
+        shift_cell =  grid.origin_shift(shift_cell);
+        window.draw(title);
+        window.display();
+        window.clear();
+        sf::sleep(sf::milliseconds(50));
+    }
+}
+
+
+void origin_shift(){
+    sf::Font font;
+    if (!font.loadFromFile("./fonts/arial.ttf")) {
+        puts("ERROR ! ");
+        return;
+    }
+    sf::Text title;
+    title.setCharacterSize(30);
+    title.setFont(font);
+    title.setString("Origin Shift Maze");
+    title.setOrigin(title.getGlobalBounds().width/2,title.getGlobalBounds().height/2);
+    title.setPosition(WIDTH/2,50);
+    Grid grid;
+    grid.init_grid_shift();
+    std::pair<int,int> shift_cell=std::make_pair(GRID_HEIGHT-1,GRID_WIDTH-1);
+    sf::RenderWindow window(sf::VideoMode(WIDTH,HEIGHT),"Origin Shift Maze");
+    for(int i=0;i<100000;i++){
+        shift_cell =  grid.origin_shift(shift_cell);
+    }
+    while(window.isOpen()){
+        sf::Event event;
+        while(window.pollEvent(event)){
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        grid.draw(window);
+        shift_cell =  grid.origin_shift(shift_cell);
+        window.draw(title);
+        window.display();
+        window.clear();
+        sf::sleep(sf::milliseconds(50));
+    }
+}
