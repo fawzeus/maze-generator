@@ -8,14 +8,14 @@ int main() {
 
     sf::Text instructionText, welcome_text,list;
     instructionText.setFont(font); welcome_text.setFont(font);list.setFont(font);
-    instructionText.setString("1. Hunt and Kill Maze Animation\n"
-                              "2. Hunt and Kill Maze\n"
-                              "3. DFS Maze\n"
-                              "4. DFS Maze Animation\n"
+    instructionText.setString("1. DFS Maze\n"
+                              "2. DFS Maze Animation\n"
+                              "3. Hunt and Kill Maze\n"
+                              "4. Hunt and Kill Maze Animation\n"
                               "5. Prim's Maze\n"
                               "6. Prim's Maze Animation\n"
-                              "7. Origin Shift Maze Animation\n"
-                              "8. Origin Shift Maze\n"
+                              "7. Origin Shift Maze\n"
+                              "8. Origin Shift Maze Animation\n"
                               "Q. Quit");
     welcome_text.setString("Welcome to the Maze Generator");
     list.setString("Press the following buttons to select an algorithm:");
@@ -39,16 +39,16 @@ int main() {
                 if (event.type == sf::Event::KeyPressed) {
                     if (event.key.code == sf::Keyboard::Numpad1 || event.key.code == sf::Keyboard::Num1) {
                         window.close();
-                        hunt_and_kill_maze_animation();
+                        dfs_maze();
                     } else if (event.key.code == sf::Keyboard::Numpad2 || event.key.code == sf::Keyboard::Num2) {
                         window.close();
-                        hunt_and_kill_maze();
+                        dfs_maze_animation();
                     } else if (event.key.code == sf::Keyboard::Numpad3 || event.key.code == sf::Keyboard::Num3) {
                         window.close();
-                        dsf_maze();
+                        hunt_and_kill_maze();
                     } else if (event.key.code == sf::Keyboard::Numpad4 || event.key.code == sf::Keyboard::Num4) {
                         window.close();
-                        dfs_maze_animation();
+                        hunt_and_kill_maze_animation();
                     } else if (event.key.code == sf::Keyboard::Numpad5 || event.key.code == sf::Keyboard::Num5) {
                         window.close();
                         prim_maze();
@@ -57,10 +57,10 @@ int main() {
                         prim_maze_animation();
                     }else if(event.key.code == sf::Keyboard::Numpad7 || event.key.code == sf::Keyboard::Num7){
                         window.close();
-                        origin_shift_animation();
+                        origin_shift();
                     }else if(event.key.code == sf::Keyboard::Numpad8 || event.key.code == sf::Keyboard::Num8){
                         window.close();
-                        origin_shift();
+                        origin_shift_animation();
                     }
                     else if(event.key.code == sf::Keyboard::Q){
                         running=false;

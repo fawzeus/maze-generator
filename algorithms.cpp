@@ -1,6 +1,6 @@
 #include "algorithms.hpp"
 
-void dsf_maze(){
+void dfs_maze(){
     sf::Font font;
     if (!font.loadFromFile("./fonts/arial.ttf")) {
         puts("ERROR ! ");
@@ -75,6 +75,8 @@ void dfs_maze_animation(){
         window.draw(title);
         window.display();
         window.clear();
+        sf::sleep(sf::milliseconds(10));
+
     }
 }
 void hunt_and_kill_maze(){
@@ -145,21 +147,21 @@ void hunt_and_kill_maze_animation(){
                 sf::sleep(sf::milliseconds(10));
             }
             else {
-                grid.set_highlited_cell(hunted_cell.first,hunted_cell.second);
-                auto res = grid.hunt_animation(hunted_cell);
-                if(res.second.second == true){
-                    current_cell = std::make_pair(res.first,res.second.first);
-                    hunt=false;
-                }
-                else if(res.first==-1 and res.second.first==-1){
-                    hunt=false;
-                    done=true;
-                    grid.set_highlited_cell(-1,-1);
-                }
-                else{
-                    hunted_cell = std::make_pair(res.first,res.second.first);
-                }
-                sf::sleep(sf::milliseconds(5));
+                    grid.set_highlited_cell(hunted_cell.first,hunted_cell.second);
+                    auto res = grid.hunt_animation(hunted_cell);
+                    if(res.second.second == true){
+                        current_cell = std::make_pair(res.first,res.second.first);
+                        hunt=false;
+                    }
+                    else if(res.first==-1 and res.second.first==-1){
+                        hunt=false;
+                        done=true;
+                        grid.set_highlited_cell(-1,-1);
+                    }
+                    else{
+                        hunted_cell = std::make_pair(res.first,res.second.first);
+                    }
+                    sf::sleep(sf::milliseconds(10));
             }
         }
         grid.draw(window);
@@ -276,7 +278,7 @@ void origin_shift_animation(){
         window.draw(title);
         window.display();
         window.clear();
-        sf::sleep(sf::milliseconds(50));
+        sf::sleep(sf::milliseconds(10));
     }
 }
 
