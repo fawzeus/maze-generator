@@ -10,7 +10,7 @@ This project showcases various maze generation algorithms implemented in C++ usi
 
 ## Watch the Video
 
-For a detailed explanation and visual walkthrough of these algorithms, check out the [YouTube video](https://www.youtube.com/watch?v=ioUl1M77hww&t=17s).
+For a detailed explanation and visual walkthrough of these algorithms, check out the [YouTube video](https://www.youtube.com/watch?v=ioUl1M77hww&t).
 
 ## Getting Started
 
